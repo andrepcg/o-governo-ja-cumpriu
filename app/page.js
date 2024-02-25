@@ -24,7 +24,7 @@ export default async function Home() {
   )
 }
 
-export async function generateMetadata({ params: { id } }) {
+export async function generateMetadata() {
   return {
     title: "O Governo Já Cumpriu?",
   }
