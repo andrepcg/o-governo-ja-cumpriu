@@ -1,5 +1,7 @@
 import "./global.css";
 
+import HomeLink from './_components/home-link'
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -34,12 +36,12 @@ export default function RootLayout({ children }) {
           content="/favicon/browserconfig.xml"
         />
         <meta name="theme-color" content="#000" />
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
-      <body className="bg-white font-sans">
+      <body className="bg-white">
         {/* <Header /> */}
         <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
           <div className="px-4 mx-auto max-w-screen-md ">
+            {<HomeLink />}
             {children}
           </div>
         </main>

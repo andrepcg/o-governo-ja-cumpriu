@@ -1,0 +1,7 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended", "next", "next/core-web-vitals"],
+  "env": {
+    "browser": true,
+    "es6": true
+  }
+}

@@ -3,7 +3,9 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint",
+    "validate-content": "node lib/validate-promessas.js"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
@@ -19,6 +21,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.17",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.1.0",
+    "eslint-plugin-react": "^7.33.2",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1"
   }
