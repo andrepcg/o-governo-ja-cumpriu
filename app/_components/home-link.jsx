@@ -11,6 +11,6 @@ export default function HomeLink() {
   }
 
   return (
-    <Link href="/" className="underline text-gray-400 text-sm mb-6">Home</Link>
+    <Link href="/" className="text-gray-400 text-sm mb-6 hover:underline">Home</Link>
   )
 }

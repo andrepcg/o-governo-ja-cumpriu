@@ -7,12 +7,12 @@ import PromessaSmall from './promessa-small';
 export default async function Section({ name, hidePromessas = false }) {
   const promessas = await getSectionPromessas(name);
 
-  const fulfilled = promessas.filter((promessa) => promessa.fulfilled_date).length
+  const fulfilled = promessas.filter((promessa) => promessa.data.fulfilled_date).length
 
   return (
     <div className="">
       <h2 className='text-2xl mb-6'>
-        <Link href={`/s/${name}`} className=" font-bold underline">{name}</Link>
+        <Link href={`/s/${name}`} className=" font-bold hover:underline">{name}</Link>
         <span className="text-lg text-gray-400">{` ${fulfilled} / ${promessas.length}`}</span>
       </h2>
 

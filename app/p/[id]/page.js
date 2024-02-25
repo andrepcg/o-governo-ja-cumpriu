@@ -17,13 +17,15 @@ export default async function Promessa({ params: { id }}) {
 
       <div className="my-6" dangerouslySetInnerHTML={{ __html: html }} />
 
-      <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date})` : '❌'}</p>
+      <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date.toDateString()})` : '❌'}</p>
       {fulfilled_date && (
         <>
-          <p>Notícias:</p>
-          <ul>
-            {links_to_news_articles && links_to_news_articles.map((article) => (
-              <li key={article}><a href={article} target="_blank" rel="noreferrer">{article}</a></li>
+          <p><strong>Notícias:</strong></p>
+          <ul className="pl-4">
+            {links_to_news_articles && links_to_news_articles.map((article, i) => (
+              <li key={article}>
+                <a href={article} target="_blank" rel="noreferrer" className="hover:underline">Link {i + 1}</a>
+              </li>
             ))}
           </ul>
         </>
