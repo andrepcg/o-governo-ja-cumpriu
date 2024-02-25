@@ -8,6 +8,7 @@
     "validate-content": "node lib/validate-promessas.js"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.2.2",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "next": "latest",

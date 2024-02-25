@@ -1,5 +1,6 @@
 import "./global.css";
 
+import { Analytics } from "@vercel/analytics/react"
 import HomeLink from './_components/home-link'
 
 export default function RootLayout({ children }) {
@@ -41,8 +42,9 @@ export default function RootLayout({ children }) {
         {/* <Header /> */}
         <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
           <div className="px-4 mx-auto max-w-screen-md ">
-            {<HomeLink />}
+            <HomeLink />
             {children}
+            <Analytics />
           </div>
         </main>
         {/* <Footer /> */}
