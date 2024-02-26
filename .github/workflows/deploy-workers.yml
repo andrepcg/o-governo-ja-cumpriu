@@ -8,7 +8,7 @@ on:
       - 'workers/marcar-promessa-cumprida/**'
 
 jobs:
-  promessa-cumprida:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

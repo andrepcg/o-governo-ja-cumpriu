@@ -2,6 +2,12 @@ name = "marcar-promessa-cumprida"
 main = "src/index.js"
 compatibility_date = "2024-02-23"
 
+[vars]
+REPO = "o-governo-ja-cumpriu"
+REPO_OWNER = "andrepcg"
+WORKFLOW_FILE_NAME = "promessa-cumprida.yml"
+REPO_MAIN_BRANCH = "main"
+
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
 # Docs: https://developers.cloudflare.com/workers/platform/environment-variables
