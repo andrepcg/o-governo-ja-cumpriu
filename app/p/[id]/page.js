@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 
-import { getPromessasData, getPromessa } from '../../../lib/promessas';
+import { getPromessasData, getPromessa } from '@/lib/promessas';
+import { REPO_URL } from '@/consts';
+
+function gitEditUrl(docPath) {
+  return `${REPO_URL}/edit/main${docPath}`;
+}
 
 export default async function Promessa({ params: { id }}) {
   const promessa = await getPromessa(id)
@@ -9,15 +14,21 @@ export default async function Promessa({ params: { id }}) {
     return notFound();
   }
 
-  const { data: { fulfilled_date, links_to_news_articles, section, sub_section }, html } = promessa;
+  const { data: { fulfilled_date, links_to_news_articles, section, sub_section }, html, docPath } = promessa;
   return (
     <article>
       <h1 className="text-3xl font-bold">{section}</h1>
       {sub_section && <h4 className="text-xl text-gray-400">{sub_section}</h4>}
 
-      <div className="my-6" dangerouslySetInnerHTML={{ __html: html }} />
+      <blockquote className="my-6 p-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
+        <div className="italic font-medium leading-relaxed text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: html }}/>
+      </blockquote>
 
       <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date.toDateString()})` : '❌'}</p>
+      {!fulfilled_date &&
+        <a className="hover:underline text-blue-400" href={gitEditUrl(docPath)}>A promessa foi cumprida? Contribui com informação!</a>
+      }
+
       {fulfilled_date && (
         <>
           <p><strong>Notícias:</strong></p>
@@ -43,8 +54,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params: { id } }) {
-  const { data: { title } } = await getPromessa(id)
+  const { data: { title, fulfilled_date } } = await getPromessa(id)
   return {
-    title,
+    title: `${fulfilled_date ? '✅' : '❌'} ${title}`,
   }
 }

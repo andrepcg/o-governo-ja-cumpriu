@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import { getSections } from '../lib/promessas';
+import { getSections } from '@/lib/promessas';
 import { PARTY_NAME, PARTY } from '../consts';
-import Section from './_components/section';
+import Section from '@/app/_components/section';
 
 export default async function Home() {
   const sections = await getSections();
