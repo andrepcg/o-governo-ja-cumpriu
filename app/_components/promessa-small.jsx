@@ -3,8 +3,8 @@
 //   id: '1-educacao-e-formacao-9',
 //   title: 'Educação e Formação / Começar Cedo: a Educação dos 0 aos 6 Anos de Idade / 9',
 //   data: {
-//     section: 'Educação e Formação',
-//     sub_section: 'Começar Cedo: a Educação dos 0 aos 6 Anos de Idade',
+//     section: Educação e Formação',
+//     sub_section: Começar Cedo: a Educação dos 0 aos 6 Anos de Idade',
 //     fulfilled_date: null,
 //     links_to_news_articles: null
 //   },
