@@ -1,0 +1,18 @@
+name: Deploy marcar-promessa-cumprida CF worker
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'workers/marcar-promessa-cumprida/**'
+
+jobs:
+  promessa-cumprida:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: "workers/marcar-promessa-cumprida"
