@@ -24,7 +24,7 @@ export default function ComoContribuir() {
   )
 }
 
-export function generateMetadata({ params: { id } }) {
+export function generateMetadata() {
   return {
     title: "Como Contribuir?"
   }

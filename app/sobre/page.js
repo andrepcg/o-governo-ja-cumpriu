@@ -1,4 +1,3 @@
-import { REPO_URL } from '@/consts';
 
 export default function Sobre() {
   return (
@@ -10,7 +9,7 @@ export default function Sobre() {
   )
 }
 
-export function generateMetadata({ params: { id } }) {
+export function generateMetadata() {
   return {
     title: "Sobre"
   }
