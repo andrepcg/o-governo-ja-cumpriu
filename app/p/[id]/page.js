@@ -14,14 +14,14 @@ export default async function Promessa({ params: { id }}) {
     return notFound();
   }
 
-  const { data: { fulfilled_date, links_to_news_articles, section, sub_section }, html, docPath } = promessa;
+  const { data: { fulfilled_date, links_to_news_articles, section, sub_section }, content, docPath } = promessa;
   return (
     <article>
       <h1 className="text-3xl font-bold">{section}</h1>
       {sub_section && <h4 className="text-xl text-gray-400">{sub_section}</h4>}
 
       <blockquote className="my-6 p-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
-        <div className="italic font-medium leading-relaxed text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: html }}/>
+        <p className="italic font-medium leading-relaxed text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: content }}/>
       </blockquote>
 
       <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date.toDateString()})` : '❌'}</p>

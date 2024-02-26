@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { getSectionPromessas } from '../../lib/promessas';
 import PromessaSmall from './promessa-small';
 
-export default async function Section({ name, hidePromessas = false }) {
-  const promessas = await getSectionPromessas(name);
+export default function Section({ name, hidePromessas = false }) {
+  const promessas = getSectionPromessas(name);
 
   const fulfilled = promessas.filter((promessa) => promessa.data.fulfilled_date).length
 

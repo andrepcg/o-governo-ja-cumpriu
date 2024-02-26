@@ -21,16 +21,16 @@ export default {
 			return new Response("Invalid inputs", { status: 400 });
 		}
 
-		// const gh_response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
-		// 	owner: env.REPO_OWNER,
-		// 	repo: env.REPO,
-		// 	workflow_id: env.WORKFLOW_FILE_NAME,
-		// 	ref: env.REPO_MAIN_BRANCH,
-		// 	inputs: json,
-		// 	headers: {
-		// 		'X-GitHub-Api-Version': '2022-11-28'
-		// 	}
-		// })
+		const gh_response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+			owner: env.REPO_OWNER,
+			repo: env.REPO,
+			workflow_id: env.WORKFLOW_FILE_NAME,
+			ref: env.REPO_MAIN_BRANCH,
+			inputs: json,
+			headers: {
+				'X-GitHub-Api-Version': '2022-11-28'
+			}
+		})
 
     return new Response(null, { status: 204 });
   },

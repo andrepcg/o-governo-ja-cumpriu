@@ -5,7 +5,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "validate-content": "node lib/validate-promessas.js"
+    "dump-json": "node -e 'const allPromessas = require(\"./lib/utils\"); console.log(JSON.stringify(allPromessas(), null, 2))' > dump.json"
   },
   "dependencies": {
     "@vercel/analytics": "^1.2.2",
