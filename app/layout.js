@@ -2,7 +2,6 @@ import "./styles/tailwind.css";
 import "./styles/utilities.css";
 import "./styles/global.css";
 
-import { Analytics } from "@vercel/analytics/react"
 import NavBar from '@/app/_components/nav-bar'
 import Search from '@/app/_components/search';
 
@@ -18,7 +17,6 @@ export default function RootLayout({ children }) {
           <div className="px-4 mx-auto max-w-screen-lg ">
             <NavBar />
             {children}
-            <Analytics />
             <Search />
           </div>
         </main>

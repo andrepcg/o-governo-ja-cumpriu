@@ -11,7 +11,6 @@
     "algoliasearch": "^4.22.1",
     "@heroicons/react": "^2.1.1",
     "@uidotdev/usehooks": "^2.4.1",
-    "@vercel/analytics": "^1.2.2",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
     "next": "14.1.1-canary.74",

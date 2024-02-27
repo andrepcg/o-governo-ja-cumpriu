@@ -50,7 +50,7 @@ const SearchResults = ({ show }) => {
 
 const MIN_VALUE_LENGTH = 3
 
-const SearchBox = ({ className, onFocus, onChange }) => {
+const SearchBox = ({ onFocus, onChange }) => {
   const { query, refine, clear } = useSearchBox()
   const [value, setValue] = useState(query)
   const debouncedInput = useDebounce(value, 300);
