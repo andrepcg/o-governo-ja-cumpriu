@@ -116,13 +116,19 @@ function ModalContent() {
   )
 }
 
-function SearchIcon({ handleClick }) {
+function SearchIcon({ handleClick, opened }) {
   return (
-    <div className="fixed top-4 right-4 ">
+    <div className="fixed top-4 right-4 z-10">
       <button onClick={handleClick} className="bg-transparent hover:bg-black font-bold hover:text-white py-2 px-4 hover:border-transparent rounded">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
-          <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-        </svg>
+        {opened ? (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+          </svg>
+        )}
       </button>
     </div>
   )
@@ -136,13 +142,18 @@ export default function Search() {
     setOpened(false)
   }
 
+  function toggleModal() {
+    setOpened(s => !s)
+  }
+
+  // close modal when page changes
   useEffect(() => {
     closeModal()
   }, [pathname]);
 
   return (
     <>
-      <SearchIcon handleClick={() => setOpened(true)} />
+      <SearchIcon opened={opened} handleClick={toggleModal} />
       <Modal
         bodyOpenClassName="overflow-hidden"
         isOpen={opened}
