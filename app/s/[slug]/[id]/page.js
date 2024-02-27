@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 
-import { getPromessasData, getPromessa } from '@/lib/promessas';
+import { getPromessasData, getSectionPromessa } from '@/lib/promessas';
 import { REPO_URL } from '@/consts';
 
 function gitEditUrl(docPath) {
   return `${REPO_URL}/edit/main${docPath}`;
 }
 
-export default async function Promessa({ params: { id }}) {
-  const promessa = await getPromessa(id)
+export default async function Promessa({ params: { slug, id }}) {
+  const promessa = getSectionPromessa(slug, id)
 
   if (!promessa) {
     return notFound();
@@ -46,15 +46,15 @@ export default async function Promessa({ params: { id }}) {
 }
 
 export async function generateStaticParams() {
-  const promessas = await getPromessasData()
-
-  return promessas.map(promessa => ({
-    id: promessa.id,
+  return getPromessasData().map(promessa => ({
+    id: promessa.fileId,
+    slug: promessa.data.sectionSlug
   }))
+
 }
 
-export async function generateMetadata({ params: { id } }) {
-  const { data: { title, fulfilled_date } } = await getPromessa(id)
+export async function generateMetadata({ params: { slug, id } }) {
+  const { data: { title, fulfilled_date } } = getSectionPromessa(slug, id)
   return {
     title: `${fulfilled_date ? '✅' : '❌'} ${title}`,
   }
