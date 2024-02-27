@@ -84,13 +84,14 @@ const SearchBox = ({ onFocus, onChange }) => {
 
         </div>
         <input
-          className="shadow-xl bg-white border h-14 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+          className="shadow-xl bg-white h-14 text-gray-900 text-sm rounded-lg block w-full pl-10 p-2.5 ring-1 ring-grey-light hover:ring-grey-mid focus:ring-2 focus:ring-black focus-visible:outline-none"
           type="text"
           placeholder="Pesquisar..."
           aria-label="Search"
           onChange={handleChange}
           value={value}
           onFocus={onFocus}
+          autoFocus
         />
       </div>
     </form>

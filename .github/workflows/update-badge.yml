@@ -1,0 +1,33 @@
+name: Actualizar o badge do Cumpridómetro
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PARTY: ad
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'promessas_data/**'
+
+jobs:
+  cumpridometro:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          git config user.name badge-manager
+          git config user.email badge-manager@github.com
+      - uses: actions/setup-node@v4
+      - name: Node Install
+        run: npm i
+      - name: Update json
+        run: node scripts/calculate_cumpridometro.js > cumpridometro.json
+      - name: Commit
+        run: |
+          git add -A && git commit -m "Updated cumpridometro.json"
+          git push --set-upstream origin main
