@@ -42,7 +42,7 @@ const SearchResults = ({ show }) => {
   if (!show) return;
 
   return (
-    <div className="mt-6 w-full overflow-y-auto max-h-dvh pb-72 px-4">
+    <div className="mt-6 w-full overflow-y-auto p-4">
       <Hits hitComponent={Hit} />
     </div>
   )
@@ -75,10 +75,10 @@ const SearchBox = ({ onFocus, onChange }) => {
   }, [debouncedInput, refine, clear])
 
   return (
-    <form className="mx-auto max-w-sm">
+    <form className="mx-auto w-2/3">
       <div class="relative w-full">
         <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-gray-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-black">
             <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
 
@@ -102,7 +102,7 @@ function ModalContent() {
   const [hasFocus, setFocus] = useState(false)
 
   return (
-    <div className="">
+    <div className="h-full flex flex-col">
       <InstantSearch searchClient={searchClient} indexName={PARTY}>
         <Configure attributesToSnippet={['content']} />
         <SearchBox
@@ -144,12 +144,12 @@ export default function Search() {
     <>
       <SearchIcon handleClick={() => setOpened(true)} />
       <Modal
+        bodyOpenClassName="overflow-hidden"
         isOpen={opened}
         onRequestClose={closeModal}
-        contentLabel="TailwindCSS Modal Example"
         overlayClassName="fixed inset-0 bg-gray-500 bg-opacity-75"
         shouldCloseOnEsc={true}
-        className="relative top-32 mx-auto max-w-xl"
+        className="relative h-dvh mx-auto max-w-xl pt-16"
       >
         <ModalContent />
       </Modal>
