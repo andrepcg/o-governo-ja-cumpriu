@@ -9,7 +9,6 @@ function gitEditUrl(docPath) {
 
 export default async function Promessa({ params: { slug, id }}) {
   const promessa = getSectionPromessa(slug, id)
-  console.log(slug, id)
 
   if (!promessa) {
     return notFound();
