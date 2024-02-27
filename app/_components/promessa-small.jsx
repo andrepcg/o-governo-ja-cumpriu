@@ -13,11 +13,11 @@
 
 import Link from 'next/link'
 
-export default function PromessaSmall({ hideSection = false, id, data: { fulfilled_date, section, sub_section }, content }) {
+export default function PromessaSmall({ hideSection = false, urlPath, data: { fulfilled_date, section, sub_section }, content }) {
   return (
     <div className="promessa mb-6">
       <div className="flex flex-row items-center">
-        <Link href={`/p/${id}`} className="p-4">{fulfilled_date ? '✅' : '❌'}</Link>
+        <Link href={urlPath} className="p-4">{fulfilled_date ? '✅' : '❌'}</Link>
         <div>
           <div className="text-base text-gray-400 dark:text-gray-400 text-sm">
             {!hideSection && <Link href={`/s/${section}`} className="font-bold">{section}</Link>}
