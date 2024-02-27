@@ -1,0 +1,25 @@
+name: Update algolia indices when data changes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'promessas_data/**'
+
+env:
+  PARTY: ad
+  ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Node Install
+        run: npm i
+      - name: Dump json
+        run: npm run dump-json > data.json
+      - name: Reindex
+        run: node scripts/reindex_algolia.js

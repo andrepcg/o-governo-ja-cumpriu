@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 
-import { getSectionPromessas, getSections } from '@/lib/promessas';
+import { getPromessasBySection, getSections } from '@/lib/promessas';
 import PromessaSmall from '@/app/_components/promessa-small';
 
 export default function Section({ params: { slug }}) {
   const sections = getSections()
   const sectionName = sections[slug]
-  const promessas = getSectionPromessas(slug)
+  const promessas = getPromessasBySection()[slug]
 
   if (!promessas) {
     return notFound();
@@ -32,18 +32,14 @@ export default function Section({ params: { slug }}) {
 }
 
 export function generateStaticParams() {
-  const sections = getSections()
-
-  return Object.entries(sections).map(([slug, name]) => ({
+  return Object.entries(getSections()).map(([slug, name]) => ({
     name,
     slug
   }))
 }
 
 export function generateMetadata({ params: { slug } }) {
-  const sections = getSections()
-
   return {
-    title: sections[slug],
+    title: getSections()[slug],
   }
 }

@@ -8,14 +8,17 @@
     "dump-json": "node -e 'const allPromessas = require(\"./lib/utils\"); console.log(JSON.stringify(allPromessas(), null, 2))' > dump.json"
   },
   "dependencies": {
+    "algoliasearch": "^4.22.1",
+    "@heroicons/react": "^2.1.1",
+    "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^1.2.2",
     "gray-matter": "^4.0.3",
     "lodash": "^4.17.21",
-    "next": "latest",
+    "next": "14.1.1-canary.74",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "remark": "^15.0.1",
-    "remark-html": "^16.0.1",
+    "react-instantsearch": "^7.6.0",
+    "react-modal": "^3.16.1",
     "slug": "^8.2.3"
   },
   "engines": {
