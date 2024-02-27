@@ -8,7 +8,7 @@ on:
       - 'promessas_data/**'
 
 env:
-  ALGOLIA_APP_ID: ${{ env.ALGOLIA_APP_ID }}
+  ALGOLIA_APP_ID: ${{ vars.ALGOLIA_APP_ID }}
   ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
 
 
@@ -19,9 +19,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Node Install
         run: npm i
-      - name: Dump json
-        run: npm run dump-json > data.json
       - name: Reindex PS
-        run: PARTY=ps node scripts/reindex_algolia.js
+        env:
+          PARTY: ps
+        run: node scripts/reindex_algolia.js
       - name: Reindex AD
-        run: PARTY=ad node scripts/reindex_algolia.js
+        env:
+          PARTY: ad
+        run: node scripts/reindex_algolia.js
