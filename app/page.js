@@ -5,7 +5,7 @@ import { PARTY_NAME, PARTY } from '../consts';
 import Section from '@/app/_components/section';
 
 export default async function Home() {
-  const sections = await getSections();
+  const sections = getSections();
 
   return (
     <div>
@@ -16,8 +16,8 @@ export default async function Home() {
       </div>
 
       <div>
-        {sections.map((section) => (
-          <Section key={section} name={section} hidePromessas />
+        {Object.entries(sections).map(([slug, name]) => (
+          <Section key={slug} slug={slug} name={name} hidePromessas />
         ))}
       </div>
     </div>

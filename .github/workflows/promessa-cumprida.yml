@@ -2,7 +2,7 @@ name: Cria Pull Request com promessa cumprida
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  BRANCH_NAME: ${{ github.run_id }}
+  BRANCH_NAME: cumprida-${{ github.run_id }}
 
 on:
   workflow_dispatch:
