@@ -23,28 +23,29 @@ function Form({ onComplete, docPath }) {
   const [error, setError] = useState();
 
   // TODO: check if captcha is loaded
-  useEffect(() => {
-    ReactRecaptcha3.init(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
-  }, [])
-
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const recaptchaToken = await ReactRecaptcha3.getToken()
+    try {
+      const recaptchaToken = await ReactRecaptcha3.getToken()
 
-    const formData = new FormData(e.target);
-    const response = await fetch(MARCAR_CUMPRIDA_URL, {
-      method: 'POST',
-      body: JSON.stringify({ ...formatDataToObject(formData), recaptchaToken }),
-      headers: {
-        'Content-Type': 'application/json'
+      const formData = new FormData(e.target);
+      const response = await fetch(MARCAR_CUMPRIDA_URL, {
+        method: 'POST',
+        body: JSON.stringify({ ...formatDataToObject(formData), recaptchaToken }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        onComplete()
+      } else {
+        console.error('Error:', response.statusText)
+        setError(true)
       }
-    });
-
-    if (response.ok) {
-      onComplete()
-    } else {
-      console.error('Error:', response.statusText)
+    } catch (error) {
+      console.error('Error:', error)
       setError(true)
     }
   }
