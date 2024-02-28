@@ -21,7 +21,9 @@ async function dispatchGithubWorkflow(env, inputs) {
     body: JSON.stringify(requestBody)
   };
 
-  await fetch(url, requestOptions)
+  const response = await fetch(url, requestOptions)
+  console.log("Github response:", response)
+  return response
 }
 
 // MAIN LOGIC
@@ -42,6 +44,8 @@ export const onRequestPost = async ({ request, env }) => {
 
   const r = await verifyCaptcha(env, json.recaptchaToken, request.headers.get('CF-Connecting-IP'))
   if (r) return r;
+
+  console.log("Calling github")
 
   await dispatchGithubWorkflow(
     env,
