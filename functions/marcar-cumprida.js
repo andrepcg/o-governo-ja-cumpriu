@@ -11,9 +11,9 @@ function dispatchGithubWorkflow(env, inputs) {
 
   const headers = new Headers();
   headers.append('Authorization', `Bearer ${env.OCTOKIT_TOKEN}`);
-  headers.append('Content-Type', 'application/json');
   headers.append('Accept', 'application/vnd.github+json');
   headers.append('X-GitHub-Api-Version', '2022-11-28');
+  headers.append('User-Agent', 'PR Bot');
 
   const requestOptions = {
     method: 'POST',
@@ -57,9 +57,8 @@ export const onRequestPost = async ({ request, env }) => {
 
   if (!gh_response.ok) {
     console.log("GH response not ok. Status", gh_response.status)
+    console.log("resp", await gh_response.text())
     return new Response("unable to complete", { status: 400 });
-  } else {
-    console.log("GH response ok. Status", gh_response.status)
   }
 
   return new Response(null, { status: 204 });
