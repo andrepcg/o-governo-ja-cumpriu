@@ -1,33 +1,25 @@
 
-// {
-//   id: '1-educacao-e-formacao-9',
-//   title: 'Educação e Formação / Começar Cedo: a Educação dos 0 aos 6 Anos de Idade / 9',
-//   data: {
-//     section: Educação e Formação',
-//     sub_section: Começar Cedo: a Educação dos 0 aos 6 Anos de Idade',
-//     fulfilled_date: null,
-//     links_to_news_articles: null
-//   },
-//   content: 'Produzir orientações para o período 0-6 anos e proporcionar às instituições o acesso a materiais educativos adequados ao desenvolvimento nas áreas das linguagens (oral, escrita, artísticas e digitais), da matemática, das ciências e da motricidade;'
-// }
-
 import Link from 'next/link'
 
-export default function PromessaSmall({ hideSection = false, urlPath, data: { fulfilled_date, section, sub_section }, content }) {
+export default function PromessaSmall({ urlPath, data: { fulfilled_date, sub_section }, content }) {
   return (
-    <div className="promessa mb-6">
+    <Link href={urlPath} className="promessa mb-6 py-2 block rounded-md border border-transparent hover:border-gray-200">
       <div className="flex flex-row items-center">
-        <Link href={urlPath} className="p-4">{fulfilled_date ? '✅' : '❌'}</Link>
-        <div>
-          <div className="text-base text-gray-400 dark:text-gray-400 text-sm">
-            {!hideSection && <Link href={`/s/${section}`} className="font-bold">{section}</Link>}
-            <p>{sub_section}</p>
-          </div>
-          <div className="">
-            <p className="" dangerouslySetInnerHTML={{ __html: content }} />
-          </div>
+        <div href={urlPath} className="p-4">{fulfilled_date ? '✅' : '❌'}</div>
+        <div className="grow">
+          {sub_section && (
+            <p className="text-base text-gray-400 dark:text-gray-400 text-sm">
+              {sub_section}
+            </p>
+          )}
+          <p className="" dangerouslySetInnerHTML={{ __html: content }} />
+        </div>
+        <div className="p-4 text-gray-400 block">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

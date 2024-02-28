@@ -5,7 +5,8 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "dump-json": "node -e 'const allPromessas = require(\"./lib/utils\"); console.log(JSON.stringify(allPromessas(), null, 2))' > dump.json"
+    "dump-json": "node -e 'const allPromessas = require(\"./lib/utils\").allPromessas; console.log(JSON.stringify(allPromessas(), null, 2))' > dump.json",
+    "validate-dataset": "node scripts/validate_promessas.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",

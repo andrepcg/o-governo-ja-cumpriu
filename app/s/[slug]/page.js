@@ -23,7 +23,7 @@ export default function Section({ params: { slug }}) {
 
       <div>
         {promessas.map((promessa) => (
-          <PromessaSmall key={promessa.id} {...promessa} hideSection />
+          <PromessaSmall key={promessa.globalId} {...promessa} hideSection />
         ))}
       </div>
     </div>

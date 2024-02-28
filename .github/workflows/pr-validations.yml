@@ -1,0 +1,19 @@
+name: PR Validations
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: NPM install
+        run: npm i
+      - name: ESlint
+        run: npm run lint
+      - name: Validate dataset
+        run: npm run validate-dataset
