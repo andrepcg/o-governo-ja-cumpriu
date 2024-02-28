@@ -1,6 +1,7 @@
 name: When data changes
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
