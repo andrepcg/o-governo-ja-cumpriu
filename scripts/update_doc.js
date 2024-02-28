@@ -27,8 +27,8 @@ if (matterContents.data.fulfilled_date) {
 
 const outputData = {
   ...matterContents.data,
-  fulfilled_date: fulfilled_date.toISOString(),
-  links: links.split(",")
+  fulfilled_date: fulfilled_date.toISOString().split('T')[0],
+  links_to_news_articles: links.split(",")
 }
 
 const newDocText = matter.stringify(matterContents.content, outputData)
