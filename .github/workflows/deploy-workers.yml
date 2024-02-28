@@ -1,4 +1,4 @@
-name: Deploy marcar-promessa-cumprida CF worker
+name: Deploy CF workers
 
 on:
   push:
