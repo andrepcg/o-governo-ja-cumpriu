@@ -1,11 +1,9 @@
 import { notFound } from "next/navigation";
 
 import { getPromessasData, getSectionPromessa } from '@/lib/promessas';
-import { REPO_URL } from '@/consts';
 
-function gitEditUrl(docPath) {
-  return `${REPO_URL}/edit/main${docPath}`;
-}
+import MarcarPromessaCumprida from '@/app/_components/marcar-promessa-cumprida';
+
 
 export default async function Promessa({ params: { slug, id }}) {
   const promessa = getSectionPromessa(slug, id)
@@ -25,9 +23,7 @@ export default async function Promessa({ params: { slug, id }}) {
       </blockquote>
 
       <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date.toDateString()})` : '❌'}</p>
-      {!fulfilled_date &&
-        <a className="hover:underline text-blue-400" href={gitEditUrl(docPath)}>A promessa foi cumprida? Contribui com informação!</a>
-      }
+      {!fulfilled_date && <MarcarPromessaCumprida docPath={docPath} />}
 
       {fulfilled_date && (
         <>

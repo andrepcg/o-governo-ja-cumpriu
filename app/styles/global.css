@@ -2,3 +2,7 @@
 a {
   cursor: pointer;
 }
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
