@@ -3,7 +3,6 @@ name: PR Validations
 on:
   pull_request:
     branches:
-      - main
 
 jobs:
   deploy:
