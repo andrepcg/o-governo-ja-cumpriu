@@ -23,6 +23,10 @@ function Form({ onComplete, docPath }) {
   const [error, setError] = useState();
 
   // TODO: check if captcha is loaded
+  useEffect(() => {
+    ReactRecaptcha3.init(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
+  }, [])
+
   async function handleSubmit(e) {
     e.preventDefault();
 
