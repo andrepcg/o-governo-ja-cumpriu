@@ -1,19 +1,36 @@
-name: Actualizar o badge do Cumpridómetro
-
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  PARTY: ad
+name: When data changes
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - 'promessas_data/**'
 
+env:
+  ALGOLIA_APP_ID: ${{ vars.ALGOLIA_APP_ID }}
+  ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+  PARTY: ad
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
 jobs:
-  cumpridometro:
+  reindex_algolia:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Node Install
+        run: npm i
+      - name: Reindex PS
+        env:
+          PARTY: ps
+        run: node scripts/reindex_algolia.js
+      - name: Reindex AD
+        env:
+          PARTY: ad
+        run: node scripts/reindex_algolia.js
+
+  cumpridometro_badge:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
