@@ -3,7 +3,7 @@
 import ReactRecaptcha3 from 'react-google-recaptcha3';
 import { useState, useEffect } from 'react';
 
-import { MARCAR_CUMPRIDA_URL, REPO_URL } from '@/consts';
+import { REPO_URL } from '@/consts';
 
 const PLACEHOLDER = `https://sapo.pt/noticia-1
 https://sapo.pt/noticia-2
@@ -34,7 +34,7 @@ function Form({ onComplete, docPath }) {
       const recaptchaToken = await ReactRecaptcha3.getToken()
 
       const formData = new FormData(e.target);
-      const response = await fetch(MARCAR_CUMPRIDA_URL, {
+      const response = await fetch("/marcar-cumprida", {
         method: 'POST',
         body: JSON.stringify({ ...formatDataToObject(formData), recaptchaToken }),
         headers: {
