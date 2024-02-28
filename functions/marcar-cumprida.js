@@ -1,7 +1,7 @@
 
 import { verifyCaptcha } from "../lib/recaptcha"
 
-async function dispatchGithubWorkflow(env, inputs) {
+function dispatchGithubWorkflow(env, inputs) {
   const url = `https://api.github.com/repos/${env.REPO_OWNER}/${env.REPO}/actions/workflows/${env.WORKFLOW_FILE_NAME}/dispatches`;
 
   const requestBody = {
@@ -21,9 +21,7 @@ async function dispatchGithubWorkflow(env, inputs) {
     body: JSON.stringify(requestBody)
   };
 
-  const response = await fetch(url, requestOptions)
-  console.log("Github response:", response)
-  return response
+  return fetch(url, requestOptions)
 }
 
 // MAIN LOGIC
@@ -47,7 +45,7 @@ export const onRequestPost = async ({ request, env }) => {
 
   console.log("Calling github")
 
-  await dispatchGithubWorkflow(
+  const gh_response = await dispatchGithubWorkflow(
     env,
     {
       doc_path: json.doc_path,
@@ -56,6 +54,13 @@ export const onRequestPost = async ({ request, env }) => {
       comment: json.comment
     }
   )
+
+  if (!gh_response.ok) {
+    console.log("GH response not ok. Status", gh_response.status)
+    return new Response("unable to complete", { status: 400 });
+  } else {
+    console.log("GH response ok. Status", gh_response.status)
+  }
 
   return new Response(null, { status: 204 });
 }
