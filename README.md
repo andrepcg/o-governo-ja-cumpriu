@@ -15,4 +15,4 @@ O principal objectivo é permitir seguir as inúmeras promessas governamentais d
 
 Como podes verificar, estás no Github.com e a consultar um software aberto. Portanto todos. Todos os cidadãos Portugueses podem, e de alguma forma _devem_, contribuir para este projecto para que o Governo, seja ele qual for, saiba que "estamos de olho nele".
 
-Se nunca contribuís-te para um projecto open-source então não percas esta oportunidade. Não te preocupes, podes fazê-lo directamente através deste site mesmo que não percebas nada de programação. Consulta [esta secção](url) para saber como contribuir.
+Se nunca contribuís-te para um projecto open-source então não percas esta oportunidade. Não te preocupes, podes fazê-lo directamente através deste site mesmo que não percebas nada de programação. Consulta [esta secção](CONTRIBUTING.md) para saber como contribuir.
