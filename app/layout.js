@@ -5,7 +5,6 @@ import "./styles/utilities.css";
 import "./styles/global.css";
 
 import NavBar from '@/app/_components/nav-bar'
-import Search from '@/app/_components/search';
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -21,7 +20,6 @@ export default function RootLayout({ children }) {
           <div className="px-4 mx-auto max-w-screen-lg ">
             <NavBar />
             {children}
-            <Search />
             {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
           </div>
         </main>
