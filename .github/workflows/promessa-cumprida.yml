@@ -40,4 +40,4 @@ jobs:
           git add -A && git commit -m "Promessa ${{ inputs.doc_path }} cumprida!"
           git push --set-upstream origin $BRANCH_NAME
       - name: Create PR
-        run: gh pr create -B main --title "Promessa ${{ inputs.doc_path }} cumprida!" -b ${{ inputs.comment }}
+        run: gh pr create -B main --title "Promessa ${{ inputs.doc_path }} cumprida!" -b "${{ inputs.comment }}"
