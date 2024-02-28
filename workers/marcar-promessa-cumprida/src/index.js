@@ -59,6 +59,6 @@ export default {
 			}
 		})
 
-    return new Response(null, { status: 204 });
+    return new Response(null, { status: 204, headers: { 'Access-Control-Allow-Origin': '*' });
   },
 };
