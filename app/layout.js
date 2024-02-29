@@ -13,6 +13,15 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="theme-color" content="#000" />
+        <meta name="description" content="A seguir as promessas eleitorais do Governo Português desde 2024"></meta>
+        <meta property="og:locale" content="pt_PT" />
+        <meta property="og:url" content="https://ogovernojacumpriu.pt/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="O Governo Já Cumpriu?" />
+        <meta property="og:description" content="A seguir as promessas eleitorais do Governo Português desde 2024" />
+        <meta property="og:image" content="https://ogovernojacumpriu.pt/og.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
       </head>
       <body className="bg-white">
         {/* <Header /> */}
