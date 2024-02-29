@@ -1,0 +1,15 @@
+name: Close Pull Request
+
+# only trigger on pull request closed events
+on:
+  pull_request:
+    types: [ closed ]
+
+jobs:
+  close_job:
+    # this job will only run if the PR has been closed without being merged
+    if: ${{ github.event.pull_request.merged == false && contains(github.event.pull_request.labels.*.name, 'MARCAR-CUMPRIDA') }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Redeploy website
+      run: curl -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}"
