@@ -1,9 +1,31 @@
 import { notFound } from "next/navigation";
 
 import { getPromessasData, getSectionPromessa } from '@/lib/promessas';
+import { pullRequestsForDocument } from '@/lib/github';
 
 import MarcarPromessaCumprida from '@/app/_components/marcar-promessa-cumprida';
 
+async function GithubPullRequests({ docPath }) {
+  const prs = await pullRequestsForDocument(docPath)
+
+  if (prs.length === 0) {
+    return <MarcarPromessaCumprida docPath={docPath} />
+  }
+
+  return (
+    <div className="mt-4">
+      <p><strong>Potencialmente marcado como concluído nos seguintes Pull Requests:</strong></p>
+      <ul>
+        {prs.map(pr => (
+          <li key={pr.id}>
+            <a className="hover:underline text-blue-400" href={pr.html_url}>#{pr.number} - {pr.created_at}</a>
+          </li>
+        ))}
+
+      </ul>
+    </div>
+  )
+}
 
 export default async function Promessa({ params: { slug, id }}) {
   const promessa = getSectionPromessa(slug, id)
@@ -23,7 +45,7 @@ export default async function Promessa({ params: { slug, id }}) {
       </blockquote>
 
       <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date.toDateString()})` : '❌'}</p>
-      {!fulfilled_date && <MarcarPromessaCumprida docPath={docPath} />}
+      {!fulfilled_date && <GithubPullRequests docPath={docPath}/>}
 
       {fulfilled_date && (
         <>

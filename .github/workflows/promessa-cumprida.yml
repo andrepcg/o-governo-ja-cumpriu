@@ -40,4 +40,8 @@ jobs:
           git add -A && git commit -m "Promessa ${{ inputs.doc_path }} cumprida!"
           git push --set-upstream origin $BRANCH_NAME
       - name: Create PR
-        run: gh pr create -B main --title "Promessa ${{ inputs.doc_path }} cumprida!" -b "${{ inputs.comment }}"
+        run: |
+          echo "${{ inputs.comment }}\n\n---\n**DO NOT EDIT**\n\n\`docPath=${{ inputs.doc_path }}\`" > body.md
+          gh pr create -B main --label "MARCAR-CUMPRIDA" --title "Promessa ${{ inputs.doc_path }} cumprida!" --body-file body.md
+      - name: Redeploy website
+        run: curl -X POST "${{ secrets.CLOUDFLARE_DEPLOY_HOOK_URL }}"
