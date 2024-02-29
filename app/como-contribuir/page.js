@@ -5,6 +5,10 @@ export default function ComoContribuir() {
     <div>
       <h1 className='text-4xl font-bold mb-12'>Como Contrinuir?</h1>
 
+      <a className='block mb-4' href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>
+        <code className="hover:bg-gray-300 bg-gray-200 p-1 rounded">CONTRIBUTING.md</code>
+      </a>
+
       <p>Não existindo uma entidade central nem um escrutínio contínuo das promessas eleitorais de cada partido, essa tarefa recai sobre os cidadãos.</p>
       <p className='mt-2'>Através da utilização de software open-source e com a ajuda de toda a comunidade, as promessas eleitorais podem ser monitorizadas.</p>
 
