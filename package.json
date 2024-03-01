@@ -9,8 +9,10 @@
     "validate-dataset": "node scripts/validate_promessas.js"
   },
   "dependencies": {
+    "@cloudflare/pages-plugin-sentry": "^1.1.1",
     "@heroicons/react": "^2.1.1",
     "@next/third-parties": "^14.1.0",
+    "@sentry/nextjs": "^7.104.0",
     "@uidotdev/usehooks": "^2.4.1",
     "algoliasearch": "^4.22.1",
     "gray-matter": "^4.0.3",
