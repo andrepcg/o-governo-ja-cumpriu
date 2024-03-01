@@ -23,7 +23,7 @@ async function downloadImage(baseImgUrl, stats) {
   return await r.blob();
 }
 
-async function generateAndUploadImage(bucket, baseImgUrl, statsUrl, imgFileName) {
+async function generateAndUploadImage(bucket, baseImgUrl, statsUrl) {
   // generate image
   // upload to bucket
 
@@ -32,7 +32,7 @@ async function generateAndUploadImage(bucket, baseImgUrl, statsUrl, imgFileName)
   const blob = await downloadImage(baseImgUrl, stats)
   console.log("Got image")
 
-  const uploadedImage = await bucket.put(imgFileName, blob, {
+  const uploadedImage = await bucket.put(todaysImageName(), blob, {
     httpMetadata: {
       contentType: "image/png",
     },
@@ -53,11 +53,13 @@ function secondsUntilEndOfDay() {
   return parseInt((EOD - now) / 1000, 10);
 }
 
-async function getTodaysImage(env) {
+function todaysImageName() {
   const todayDate = new Date().toISOString().split('T')[0]; // 2024-11-28
-  const imgFileName = `og-${todayDate}.png`;
+  return `og-${todayDate}.png`;
+}
 
-  return await env.GOVERNO_BUCKET.get(imgFileName);
+async function getTodaysImage(env) {
+  return await env.GOVERNO_BUCKET.get(todaysImageName());
 }
 
 export const onRequestGet = async ({ request, env }) => {
@@ -68,7 +70,7 @@ export const onRequestGet = async ({ request, env }) => {
 
   if (!object) {
     console.log("Image does not exist, generating")
-    let res = await generateAndUploadImage(env.GOVERNO_BUCKET, env.BASE_IMG_URL, env.STATS_URL, imgFileName);
+    let res = await generateAndUploadImage(env.GOVERNO_BUCKET, env.BASE_IMG_URL, env.STATS_URL);
     body = res.blob
     object = res.object
   } else {
