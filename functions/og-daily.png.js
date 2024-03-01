@@ -83,7 +83,6 @@ export const onRequestGet = async ({ request, env }) => {
       headers: {
         "ETag": object.httpEtag,
         "Cache-Control": `max-age=${secondsUntilEndOfDay()}`,
-        "Expires": EOD.toUTCString(),
         "Access-Control-Allow-Origin": "*",
         "Last-Modified": object.uploaded
       }
@@ -94,7 +93,6 @@ export const onRequestGet = async ({ request, env }) => {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": `max-age=${secondsUntilEndOfDay()}`,
-      "Expires": EOD.toUTCString(),
       "ETag": object.httpEtag,
       "Access-Control-Allow-Origin": "*",
       "Last-Modified": object.uploaded
