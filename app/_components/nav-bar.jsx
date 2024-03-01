@@ -8,8 +8,6 @@ import Search from '@/app/_components/search';
 export default function NavBar() {
   const pathname = usePathname()
 
-  if (pathname === '/sala-de-espera') return;
-
   return (
     <navbar className='block mb-6'>
       <Search />

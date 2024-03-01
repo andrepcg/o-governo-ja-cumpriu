@@ -4,7 +4,8 @@ import "./styles/tailwind.css";
 import "./styles/utilities.css";
 import "./styles/global.css";
 
-import NavBar from '@/app/_components/nav-bar'
+// import NavBar from '@/app/_components/nav-bar'
+// TODO: enable navbar when online
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -27,7 +28,7 @@ export default function RootLayout({ children }) {
         {/* <Header /> */}
         <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
           <div className="px-4 mx-auto max-w-screen-lg ">
-            <NavBar />
+            {/* <NavBar /> */}
             {children}
             {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
           </div>
