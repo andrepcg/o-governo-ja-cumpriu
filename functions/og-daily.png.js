@@ -62,8 +62,17 @@ async function getTodaysImage(env) {
   return await env.GOVERNO_BUCKET.get(todaysImageName());
 }
 
-export const onRequestGet = async ({ request, env }) => {
-  console.log(request.headers)
+export const onRequestGet = async ({ request, env, ...ctx }) => {
+  const cacheUrl = new URL(request.url);
+
+  // Construct the cache key from the cache URL
+  const cacheKey = new Request(cacheUrl.toString(), request);
+  const cache = caches.default;
+  let response = await cache.match(cacheKey);
+
+  if (response) {
+    return response;
+  }
 
   let object = await getTodaysImage(env);
   let body;
@@ -77,23 +86,7 @@ export const onRequestGet = async ({ request, env }) => {
     body = object.body
   }
 
-  if (
-    request.headers.get('If-None-Match') === object.httpEtag ||
-    request.headers.get('If-None-Match') === object.etag
-  ) {
-    return new Response(null, {
-      status: 304,
-      headers: {
-        "ETag": object.httpEtag,
-        "Cache-Control": `max-age=${secondsUntilEndOfDay()}, public`,
-        "Expires": EOD.toUTCString(),
-        "Access-Control-Allow-Origin": "*",
-        "Last-Modified": object.uploaded
-      }
-    });
-  }
-
-  return new Response(body, {
+  response = new Response(body, {
     headers: {
       "Content-Type": "image/png",
       "Cache-Control": `max-age=${secondsUntilEndOfDay()}, public`,
@@ -103,4 +96,7 @@ export const onRequestGet = async ({ request, env }) => {
       "Last-Modified": object.uploaded
     }
   });
+
+  ctx.waitUntil(cache.put(cacheKey, response.clone()));
+  return response;
 };
