@@ -62,41 +62,13 @@ async function getTodaysImage(env) {
   return await env.GOVERNO_BUCKET.get(todaysImageName());
 }
 
-export const onRequestGet = async ({ request, env, ...ctx }) => {
-  const cacheUrl = new URL(request.url);
-
-  // Construct the cache key from the cache URL
-  const cacheKey = new Request(cacheUrl.toString(), request);
-  const cache = caches.default;
-  let response = await cache.match(cacheKey);
-
-  if (response) {
-    return response;
-  }
-
+export const onRequestGet = async ({ request, env }) => {
   let object = await getTodaysImage(env);
-  let body;
 
   if (!object) {
     console.log("Image does not exist, generating")
-    let res = await generateAndUploadImage(env.GOVERNO_BUCKET, env.BASE_IMG_URL, env.STATS_URL);
-    body = res.blob
-    object = res.object
-  } else {
-    body = object.body
+    await generateAndUploadImage(env.GOVERNO_BUCKET, env.BASE_IMG_URL, env.STATS_URL);
   }
 
-  response = new Response(body, {
-    headers: {
-      "Content-Type": "image/png",
-      "Cache-Control": `max-age=${secondsUntilEndOfDay()}, public`,
-      "Expires": EOD.toUTCString(),
-      "ETag": object.httpEtag,
-      "Access-Control-Allow-Origin": "*",
-      "Last-Modified": object.uploaded
-    }
-  });
-
-  ctx.waitUntil(cache.put(cacheKey, response.clone()));
-  return response;
+  return Response.redirect(`https://b.ogovernojacumpriu.pt/${todaysImageName()}`, 302);
 };
