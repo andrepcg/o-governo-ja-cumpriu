@@ -77,7 +77,10 @@ export const onRequestGet = async ({ request, env }) => {
     body = object.body
   }
 
-  if (request.headers.get('If-None-Match') === object.httpEtag) {
+  if (
+    request.headers.get('If-None-Match') === object.httpEtag ||
+    request.headers.get('If-None-Match') === object.etag
+  ) {
     return new Response(null, {
       status: 304,
       headers: {
