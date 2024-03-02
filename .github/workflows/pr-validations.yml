@@ -4,8 +4,11 @@ on:
   pull_request:
     branches:
 
+env:
+  PARTY=ad
+
 jobs:
-  deploy:
+  lint-validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
