@@ -5,7 +5,7 @@ on:
     branches:
 
 env:
-  PARTY=ad
+  PARTY: ${{ vars.PARTY }}
 
 jobs:
   lint-validate:

@@ -11,7 +11,7 @@ on:
 env:
   ALGOLIA_APP_ID: ${{ vars.ALGOLIA_APP_ID }}
   ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
-  PARTY: ad
+  PARTY: ${{ vars.PARTY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
@@ -22,13 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Node Install
         run: npm i
-      - name: Reindex PS
-        env:
-          PARTY: ps
-        run: node scripts/reindex_algolia.js
-      - name: Reindex AD
-        env:
-          PARTY: ad
+      - name: Reindex data to algolia
         run: node scripts/reindex_algolia.js
 
   cumpridometro_badge:
