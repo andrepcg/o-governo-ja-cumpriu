@@ -63,44 +63,12 @@ async function getTodaysImage(env) {
 }
 
 export const onRequestGet = async ({ request, env }) => {
-  console.log(request.headers)
-
   let object = await getTodaysImage(env);
-  let body;
 
   if (!object) {
     console.log("Image does not exist, generating")
-    let res = await generateAndUploadImage(env.GOVERNO_BUCKET, env.BASE_IMG_URL, env.STATS_URL);
-    body = res.blob
-    object = res.object
-  } else {
-    body = object.body
+    await generateAndUploadImage(env.GOVERNO_BUCKET, env.BASE_IMG_URL, env.STATS_URL);
   }
 
-  if (
-    request.headers.get('If-None-Match') === object.httpEtag ||
-    request.headers.get('If-None-Match') === object.etag
-  ) {
-    return new Response(null, {
-      status: 304,
-      headers: {
-        "ETag": object.httpEtag,
-        "Cache-Control": `max-age=${secondsUntilEndOfDay()}, public`,
-        "Expires": EOD.toUTCString(),
-        "Access-Control-Allow-Origin": "*",
-        "Last-Modified": object.uploaded
-      }
-    });
-  }
-
-  return new Response(body, {
-    headers: {
-      "Content-Type": "image/png",
-      "Cache-Control": `max-age=${secondsUntilEndOfDay()}, public`,
-      "Expires": EOD.toUTCString(),
-      "ETag": object.httpEtag,
-      "Access-Control-Allow-Origin": "*",
-      "Last-Modified": object.uploaded
-    }
-  });
+  return Response.redirect(`https://b.ogovernojacumpriu.pt/${todaysImageName()}`, 302);
 };
