@@ -15,6 +15,7 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="theme-color" content="#000" />
         <meta name="description" content="A seguir as promessas eleitorais do Governo Português desde 2024"></meta>
+        <meta name="keywords" content="eleições legislativas portugal, sondagens, legislativas, eleições, 2024, governo, promessas, programa eleitoral, cumprir, iniciativa liberal, partido socialista, aliança democrática, chega, livre, bloco esquerda, open-source, github, pan"></meta>
         <meta property="og:locale" content="pt_PT" />
         <meta property="og:url" content="https://ogovernojacumpriu.pt/" />
         <meta property="og:type" content="website" />
