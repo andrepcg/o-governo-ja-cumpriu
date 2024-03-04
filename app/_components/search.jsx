@@ -11,10 +11,34 @@ import { InstantSearch, Hits, Configure, Highlight, useSearchBox, Snippet } from
 
 import { PARTY } from '@/consts';
 
-const searchClient = algoliasearch(
+const algoliaClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY
 );
+
+const searchClient = {
+  ...algoliaClient,
+  search(requests) {
+    if (requests.every(({ params }) => !params.query)) {
+      console.log("Empty query")
+      return Promise.resolve({
+        results: requests.map(() => ({
+          hits: [],
+          nbHits: 0,
+          nbPages: 0,
+          page: 0,
+          processingTimeMS: 0,
+          hitsPerPage: 0,
+          exhaustiveNbHits: false,
+          query: '',
+          params: '',
+        })),
+      });
+    }
+
+    return algoliaClient.search(requests);
+  },
+};
 
 function Hit({ hit }) {
 
@@ -66,9 +90,10 @@ const SearchBox = ({ onFocus, onChange }) => {
   )
 
   useEffect(() => {
-    if (debouncedInput.length >= MIN_VALUE_LENGTH) {
+    const trimmed = debouncedInput.trim()
+    if (trimmed.length >= MIN_VALUE_LENGTH) {
       refine(debouncedInput)
-    } else if (debouncedInput.length < MIN_VALUE_LENGTH) {
+    } else if (trimmed.length < MIN_VALUE_LENGTH) {
       clear()
     }
     onChange(debouncedInput)
