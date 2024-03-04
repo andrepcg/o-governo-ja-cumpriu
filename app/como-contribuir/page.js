@@ -17,7 +17,7 @@ export default function ComoContribuir() {
           <li>Criar conta no <a href="https://github.com" className="text-blue-500 hover:underline">Github.com</a></li>
           <li>Abrir o repositório <a href={REPO_URL} className="text-blue-500 hover:underline">{REPO_URL}</a></li>
           <li>Na pasta <code className="bg-gray-200 px-1 rounded">promessas_data/&lt;partido&gt;</code> encontras o documento que pretendes</li>
-          <li>Preenches os campos <code className="bg-gray-200 px-1 rounded">fulfilled_date</code> e <code class="bg-gray-200 px-1 rounded">links_to_news_articles</code> (lista)</li>
+          <li>Preenches os campos <code className="bg-gray-200 px-1 rounded">fulfilled_date</code> e <code className="bg-gray-200 px-1 rounded">links_to_news_articles</code> (lista)</li>
           <li>Abres um pull request e aguardas review da comunidade</li>
       </ol>
 
