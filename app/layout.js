@@ -7,7 +7,10 @@ import "./styles/global.css";
 // import NavBar from '@/app/_components/nav-bar'
 // TODO: enable navbar when online
 
+import { injectLfTracker } from '@/lib/utils';
+
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const LF_TRACKING_ID = process.env.NEXT_PUBLIC_LF_ID;
 
 export default function RootLayout({ children }) {
   return (
@@ -24,6 +27,7 @@ export default function RootLayout({ children }) {
         <meta property="og:image" content="https://ogovernojacumpriu.pt/og.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
+        {LF_TRACKING_ID && injectLfTracker(LF_TRACKING_ID)}
       </head>
       <body className="bg-white">
         <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
