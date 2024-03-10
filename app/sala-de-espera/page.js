@@ -15,6 +15,7 @@ export default function SalaDeEspera() {
         />
 
       </div>
+      <h1 className='mb-6 text-3xl font-bold'>Plataforma para seguimento das promessas eleitorais</h1>
       <h2 className='mb-2 text-lg'>Aguardando pacientemente pelo dia das eleições legislativas de 2024.</h2>
       <p className='mb-12 text-sm'>PS: Resultados finais deverão ser conhecidos depois de 20 de março</p>
 
