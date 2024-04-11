@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import Countdown from '@/app/_components/countdown'
 
-const DATE = new Date("2024-03-20T08:00:00Z")
+const DATE = new Date("2024-04-10T08:00:00Z")
 
 export default function SalaDeEspera() {
 
@@ -16,8 +16,8 @@ export default function SalaDeEspera() {
 
       </div>
       <h1 className='mb-6 text-3xl font-bold'>Plataforma para seguimento das promessas eleitorais</h1>
-      <h2 className='mb-2 text-lg'>Aguardando pacientemente pelo dia das eleições legislativas de 2024.</h2>
-      <p className='mb-12 text-sm'>PS: Resultados finais deverão ser conhecidos depois de 20 de março</p>
+      <h2 className='mb-2 text-lg'>Aguardando pacientemente pela formação do novo governo.</h2>
+      <p className='mb-12 text-sm'>PS: A 10 de Abril será publicado, em Diário da República, o mapa oficial de resultados</p>
 
       <div className="w-80 mx-auto">
         <Countdown date={DATE} />
