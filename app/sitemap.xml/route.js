@@ -3,7 +3,7 @@
 import { getPromessasData } from '@/lib/promessas';
 
 function urlForPromessa(promessa) {
-  return `https://ogovernojacumpriu.pt/${promessa.data.sectionSlug}/${promessa.fileId}`;
+  return `https://ogovernojacumpriu.pt/s/${promessa.data.sectionSlug}/${promessa.fileId}`;
 }
 
 async function getSitemap() {
