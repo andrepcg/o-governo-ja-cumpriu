@@ -11,10 +11,34 @@ import { InstantSearch, Hits, Configure, Highlight, useSearchBox, Snippet } from
 
 import { PARTY } from '@/consts';
 
-const searchClient = algoliasearch(
+const algoliaClient = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
   process.env.NEXT_PUBLIC_ALGOLIA_API_KEY
 );
+
+const searchClient = {
+  ...algoliaClient,
+  search(requests) {
+    if (requests.every(({ params }) => !params.query)) {
+      console.log("Empty query")
+      return Promise.resolve({
+        results: requests.map(() => ({
+          hits: [],
+          nbHits: 0,
+          nbPages: 0,
+          page: 0,
+          processingTimeMS: 0,
+          hitsPerPage: 0,
+          exhaustiveNbHits: false,
+          query: '',
+          params: '',
+        })),
+      });
+    }
+
+    return algoliaClient.search(requests);
+  },
+};
 
 function Hit({ hit }) {
 
@@ -66,9 +90,10 @@ const SearchBox = ({ onFocus, onChange }) => {
   )
 
   useEffect(() => {
-    if (debouncedInput.length >= MIN_VALUE_LENGTH) {
+    const trimmed = debouncedInput.trim()
+    if (trimmed.length >= MIN_VALUE_LENGTH) {
       refine(debouncedInput)
-    } else if (debouncedInput.length < MIN_VALUE_LENGTH) {
+    } else if (trimmed.length < MIN_VALUE_LENGTH) {
       clear()
     }
     onChange(debouncedInput)
@@ -76,8 +101,8 @@ const SearchBox = ({ onFocus, onChange }) => {
 
   return (
     <form className="mx-auto w-2/3">
-      <div class="relative w-full">
-        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+      <div className="relative w-full">
+        <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-black">
             <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
