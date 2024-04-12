@@ -9,7 +9,6 @@ export default function ComoContribuir() {
         <code className="hover:bg-gray-300 bg-gray-200 p-1 rounded">CONTRIBUTING.md</code>
       </a>
 
-      <p>Não existindo uma entidade central nem um escrutínio contínuo das promessas eleitorais de cada partido, essa tarefa recai sobre os cidadãos.</p>
       <p className='mt-2'>Através da utilização de software open-source e com a ajuda de toda a comunidade, as promessas eleitorais podem ser monitorizadas.</p>
 
       <h3 className="text-xl font-bold my-4">Para contribuir segue os seguintes passos:</h3>
