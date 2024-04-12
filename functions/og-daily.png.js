@@ -31,7 +31,7 @@ async function generateAndUploadImage(bucket, baseImgUrl, statsUrl) {
   const stats = await getStatsFromJson(statsUrl);
   console.log("Got stats", stats)
   const blob = await generateImage(baseImgUrl, stats)
-  console.log("Got image")
+  console.log("Got image from", baseImgUrl)
 
   await bucket.put(todaysImageName(), blob, {
     httpMetadata: {
