@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="O Governo Já Cumpriu?" />
         <meta property="og:description" content="A seguir as promessas eleitorais do Governo Português desde 2024" />
-        <meta property="og:image" content="https://ogovernojacumpriu.pt/og.png" />
+        <meta property="og:image" content="https://ogovernojacumpriu.pt/og-daily.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         {LF_TRACKING_ID && (
