@@ -12,7 +12,7 @@ export default function Section({ name, slug, hidePromessas = false }) {
   return (
     <div className="">
       <h2 className='text-2xl mb-6'>
-        <Link href={`/s/${slug}`} className=" font-bold hover:underline">{name}</Link>
+        <Link href={`/s/${slug}`} prefetch={false} className=" font-bold hover:underline">{name}</Link>
         <span className="text-lg text-gray-400">{` ${fulfilled} / ${promessas.length}`}</span>
       </h2>
 

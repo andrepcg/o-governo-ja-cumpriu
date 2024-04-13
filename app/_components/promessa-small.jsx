@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function PromessaSmall({ urlPath, data: { fulfilled_date, sub_section }, content }) {
   return (
-    <Link href={urlPath} className="promessa mb-6 py-2 block rounded-md border border-transparent group hover:border-gray-200">
+    <Link href={urlPath} prefetch={false} className="promessa mb-6 py-2 block rounded-md border border-transparent group hover:border-gray-200">
       <div className="flex flex-row items-center">
         <div href={urlPath} className="p-4">{fulfilled_date ? '✅' : '❌'}</div>
         <div className="grow">
