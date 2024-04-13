@@ -72,7 +72,7 @@ export default async function Promessa({ params: { slug, id }}) {
 
   const { data: { fulfilled_date, links_to_news_articles, section, sub_section }, content, docPath } = promessa;
   return (
-    <article itemtype="https://schema.org/NewsArticle">
+    <article itemType="https://schema.org/NewsArticle">
       <Link href={`/s/${slug}`}><h1 className="text-3xl font-bold">{section}</h1></Link>
       {sub_section && <h4 className="text-xl text-gray-400">{sub_section} • {id}</h4>}
 
