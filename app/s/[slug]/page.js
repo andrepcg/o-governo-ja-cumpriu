@@ -6,20 +6,18 @@ import PromessaSmall from '@/app/_components/promessa-small';
 function generateJsonLd(title, slug) {
   if (!title || !slug) return;
 
-  const data = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": title,
-          "item": `https://ogovernojacumpriu.pt/s/${slug}`
-        }
-      ]
-    }
-  ]
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": title,
+        "item": `https://ogovernojacumpriu.pt/s/${slug}`
+      }
+    ]
+  }
   return (
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
   )

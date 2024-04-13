@@ -31,29 +31,33 @@ async function GithubPullRequests({ docPath }) {
 function generateJsonLd(promessa, slug) {
   const { data: { section, sub_section, title }, content } = promessa;
 
-  const data = [
-    {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": title,
-      "articleBody": content,
-      articleSection: `${section} / ${sub_section}`
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": title,
-        "item": `https://ogovernojacumpriu.pt/s/${slug}`
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": sub_section
-      }]
-    }
-  ]
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "NewsArticle",
+        "headline": title,
+        "articleBody": content,
+        articleSection: `${section} / ${sub_section}`
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+            "@type": "ListItem",
+            "position": 1,
+            "name": title,
+            "item": `https://ogovernojacumpriu.pt/s/${slug}`
+          },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": sub_section
+          }
+        ]
+      }
+    ]
+  }
+
   return (
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
   )
