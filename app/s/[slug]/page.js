@@ -3,6 +3,28 @@ import { notFound } from "next/navigation";
 import { getPromessasBySection, getSections } from '@/lib/promessas';
 import PromessaSmall from '@/app/_components/promessa-small';
 
+function generateJsonLd(title, slug) {
+  if (!title || !slug) return;
+
+  const data = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": title,
+          "item": `https://ogovernojacumpriu.pt/s/${slug}`
+        }
+      ]
+    }
+  ]
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
+  )
+}
+
 export default function Section({ params: { slug }}) {
   const sections = getSections()
   const sectionName = sections[slug]
@@ -26,6 +48,7 @@ export default function Section({ params: { slug }}) {
           <PromessaSmall key={promessa.globalId} {...promessa} hideSection />
         ))}
       </div>
+      {generateJsonLd(sectionName, slug)}
     </div>
   )
 
