@@ -7,9 +7,8 @@ import { pullRequestsForDocument } from '@/lib/github';
 import MarcarPromessaCumprida from '@/app/_components/marcar-promessa-cumprida';
 
 async function GithubPullRequests({ docPath }) {
-  // const prs = await pullRequestsForDocument(docPath)
+  const prs = await pullRequestsForDocument(docPath)
 
-  const prs = []
   if (prs.length === 0) {
     return <MarcarPromessaCumprida docPath={docPath} />
   }
