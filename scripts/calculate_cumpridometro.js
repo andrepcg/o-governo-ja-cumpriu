@@ -1,7 +1,7 @@
 const allPromessas = require("../lib/utils").allPromessas();
 
 const total = allPromessas.length
-const fulfilled = allPromessas.filter(p => p.fulfilled_date).length
+const fulfilled = allPromessas.filter(p => p.data.fulfilled_date).length
 const data = {
   total: allPromessas.length,
   fulfilled: fulfilled,
