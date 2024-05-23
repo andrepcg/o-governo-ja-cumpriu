@@ -3,7 +3,7 @@ import { REPO_URL } from '@/consts';
 export default function ComoContribuir() {
   return (
     <div>
-      <h1 className='text-4xl font-bold mb-12'>Como Contrinuir?</h1>
+      <h1 className='text-4xl font-bold mb-12'>Como Contribuir?</h1>
 
       <a className='block mb-4' href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>
         <code className="hover:bg-gray-300 bg-gray-200 p-1 rounded">CONTRIBUTING.md</code>
