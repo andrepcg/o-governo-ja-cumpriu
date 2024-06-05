@@ -36,7 +36,7 @@ jobs:
       - name: brach and update document
         run: |
           git checkout -b $BRANCH_NAME
-          node scripts/update_doc.js ${{ inputs.doc_path }} ${{ inputs.fulfilled_date }} ${{ inputs.links }}
+          node scripts/update_doc.js ${{ inputs.doc_path }} ${{ inputs.fulfilled_date }} "${{ inputs.links }}"
           git add -A && git commit -m "Promessa ${{ inputs.doc_path }} cumprida!"
           git push --set-upstream origin $BRANCH_NAME
       - name: Create PR
