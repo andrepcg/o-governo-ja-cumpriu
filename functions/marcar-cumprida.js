@@ -24,6 +24,10 @@ function dispatchGithubWorkflow(env, inputs) {
   return fetch(url, requestOptions)
 }
 
+function parseLinks(data) {
+  return data.split(/[\n,]/).map(l => l.trim()).filter(s => s.length > 0);
+}
+
 // MAIN LOGIC
 
 export const onRequestPost = async ({ request, env }) => {
@@ -35,8 +39,9 @@ export const onRequestPost = async ({ request, env }) => {
   }
 
   console.log("Received", json);
+  const links = parseLinks(json.links);
 
-  if (isNaN(new Date(json.fulfilled_date)) || json.links.split(",").length === 0) {
+  if (isNaN(new Date(json.fulfilled_date)) || links.length === 0) {
     return new Response("Invalid inputs", { status: 400 });
   }
 
@@ -50,7 +55,7 @@ export const onRequestPost = async ({ request, env }) => {
     {
       doc_path: json.doc_path,
       fulfilled_date: json.fulfilled_date,
-      links: json.links,
+      links: links.join(","),
       comment: json.comment
     }
   )
