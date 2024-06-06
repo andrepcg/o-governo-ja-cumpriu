@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from 'next/link'
 
-import { getPromessasData, getSectionPromessa } from '@/lib/promessas';
+import { getPromessasData, getSectionPromessa, getSectionPromessaPreviousNext } from '@/lib/promessas';
 import { pullRequestsForDocument } from '@/lib/github';
 
 import MarcarPromessaCumprida from '@/app/_components/marcar-promessa-cumprida';
@@ -70,33 +70,43 @@ export default async function Promessa({ params: { slug, id }}) {
     return notFound();
   }
 
+  const prevNext = getSectionPromessaPreviousNext(slug, id)
+
   const { data: { fulfilled_date, links_to_news_articles, section, sub_section }, content, docPath } = promessa;
   return (
-    <article itemType="https://schema.org/NewsArticle">
-      <Link href={`/s/${slug}`}><h1 className="text-3xl font-bold">{section}</h1></Link>
-      {sub_section && <h4 className="text-xl text-gray-400">{sub_section} • {id}</h4>}
+    <div>
+      <article itemType="https://schema.org/NewsArticle">
+        <Link href={`/s/${slug}`}><h1 className="text-3xl font-bold">{section}</h1></Link>
+        {sub_section && <h4 className="text-xl text-gray-400">{sub_section} • {id}</h4>}
 
-      <blockquote className="my-6 p-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
-        <p id="main" className="italic font-medium leading-relaxed text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: content }}/>
-      </blockquote>
+        <blockquote className="my-6 p-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
+          <p id="main" className="italic font-medium leading-relaxed text-gray-900 dark:text-white" dangerouslySetInnerHTML={{ __html: content }}/>
+        </blockquote>
 
-      <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date.toDateString()})` : '❌'}</p>
-      {!fulfilled_date && <GithubPullRequests docPath={docPath}/>}
+        <p><strong>Cumprida?</strong> {fulfilled_date ? `✅ (${fulfilled_date.toDateString()})` : '❌'}</p>
+        {!fulfilled_date && <GithubPullRequests docPath={docPath}/>}
 
-      {fulfilled_date && (
-        <>
-          <p><strong>Notícias:</strong></p>
-          <ul className="pl-4">
-            {links_to_news_articles && links_to_news_articles.map((article, i) => (
-              <li key={article}>
-                <a href={article} target="_blank" rel="noreferrer" className="hover:underline">Link {i + 1}</a>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-      {generateJsonLd(promessa, slug)}
-    </article>
+        {fulfilled_date && (
+          <>
+            <p><strong>Notícias:</strong></p>
+            <ul className="pl-4">
+              {links_to_news_articles && links_to_news_articles.map((article, i) => (
+                <li key={article}>
+                  <a href={article} target="_blank" rel="noreferrer" className="hover:underline">Link {i + 1}</a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+        {generateJsonLd(promessa, slug)}
+      </article>
+      <nav className="mt-24">
+        <ul className="flex justify-evenly">
+          <li>{prevNext.previous && <Link className="rounded-md border p-3 border-gray-200 hover:bg-gray-100" href={`/s/${slug}/${prevNext.previous.fileId}`}>← {prevNext.previous.fileId}</Link>}</li>
+          <li>{prevNext.next && <Link className="rounded-md border p-3 border-gray-200 hover:bg-gray-100" href={`/s/${slug}/${prevNext.next.fileId}`}>{prevNext.next.fileId} →</Link>}</li>
+        </ul>
+        </nav>
+    </div>
   )
 }
 
